@@ -260,7 +260,7 @@ export default
             this.isPhone = window.innerWidth < 800
             if(this.isPhone)
             {
-                this.carouselTop = 'top:' + ((window.innerHeight - 500) / 2) + "px;"
+                this.carouselTop = 'top:' + ((window.innerHeight - 600) / 2) + "px;"
                 this.imageTop = 'top:' + ((window.innerHeight - 600) / 2) + "px;"
             }
             else
@@ -275,7 +275,7 @@ export default
         this.isPhone = window.innerWidth < 800
         if(this.isPhone)
         {
-            this.carouselTop = 'top:' + ((window.innerHeight - 500) / 2) + "px;"
+            this.carouselTop = 'top:' + ((window.innerHeight - 600) / 2) + "px;"
             this.imageTop = 'top:' + ((window.innerHeight - 600) / 2) + "px;"
         }
         else
