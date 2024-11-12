@@ -7,7 +7,6 @@
         text-color="#222"
         active-text-color="#ff5f5f"
         :ellipsis="false"
-        :default-active="defaultActive"
     >
       <el-image
         :src="Logo"

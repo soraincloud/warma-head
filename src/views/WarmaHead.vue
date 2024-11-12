@@ -1,49 +1,92 @@
 <template>
-    <el-image
-        :src="require('@/assets/head/' + head)"
-        class="FunctionHead-head-image-style"
-        :style="[imageTop, opacity]"
-    ></el-image>
-    <div
-        class="FunctionHead-head-div1-style"
-        :style="[divHeight, divTop1]"
-    ></div>
-    <div
-        class="FunctionHead-head-div2-style"
-        :style="[divHeight, divTop2]"
-    ></div>
-    <div
-        class="FunctionHead-head-div3-style"
-        :style="[divHeight, divTop3]"
-    ></div>
-    <div
-        class="FunctionHead-head-div4-style"
-        :style="[divHeight, divTop4]"
-    ></div>
-    <el-row>
-        <el-col :span="12"></el-col>
-        <el-col :span="9">
-            <el-carousel
-                trigger="click"
-                height="100px"
-                :autoplay="false"
-                @change="carouselChange($event)"
-                :style="carouselTop"
-                class="FunctionHead-carousel-style"
-            >
-                <el-carousel-item v-for="(item, i) in carousel" :key="i">
-                    <el-image
-                        :src="require('@/assets/head/' + item.webp)"
-                        class="FunctionHead-carousel-image-style"
-                    ></el-image>
-                    <h3 class="FunctionHead-carousel-text-style">
-                        {{ item.text }}
-                    </h3>
-                </el-carousel-item>
-            </el-carousel>
-        </el-col>
-        <el-col :span="3"></el-col>
-    </el-row>
+    <div v-if="!isPhone">
+        <el-image
+            :src="require('@/assets/head/' + head)"
+            class="FunctionHead-head-image-style"
+            :style="[imageTop, opacity]"
+        ></el-image>
+        <div
+            class="FunctionHead-head-div1-style"
+            :style="[divHeight, divTop1]"
+        ></div>
+        <div
+            class="FunctionHead-head-div2-style"
+            :style="[divHeight, divTop2]"
+        ></div>
+        <div
+            class="FunctionHead-head-div3-style"
+            :style="[divHeight, divTop3]"
+        ></div>
+        <div
+            class="FunctionHead-head-div4-style"
+            :style="[divHeight, divTop4]"
+        ></div>
+        <el-row>
+            <el-col :span="12"></el-col>
+            <el-col :span="9">
+                <el-carousel
+                    trigger="click"
+                    height="100px"
+                    :autoplay="false"
+                    @change="carouselChange($event)"
+                    :style="carouselTop"
+                    class="FunctionHead-carousel-style"
+                >
+                    <el-carousel-item v-for="(item, i) in carousel" :key="i">
+                        <el-image
+                            :src="require('@/assets/head/' + item.webp)"
+                            class="FunctionHead-carousel-image-style"
+                        ></el-image>
+                        <h3 class="FunctionHead-carousel-text-style">
+                            {{ item.text }}
+                        </h3>
+                    </el-carousel-item>
+                </el-carousel>
+            </el-col>
+            <el-col :span="3"></el-col>
+        </el-row>
+    </div>
+    <div v-if="isPhone">
+        <el-image
+            :src="require('@/assets/head/' + head)"
+            class="phone-FunctionHead-head-image-style"
+            :style="[imageTop, opacity]"
+        ></el-image>
+        <div
+            class="FunctionHead-head-div1-style"
+            :style="[divHeight, divTop1]"
+        ></div>
+        <div
+            class="FunctionHead-head-div2-style"
+            :style="[divHeight, divTop2]"
+        ></div>
+        <div
+            class="FunctionHead-head-div3-style"
+            :style="[divHeight, divTop3]"
+        ></div>
+        <div
+            class="FunctionHead-head-div4-style"
+            :style="[divHeight, divTop4]"
+        ></div>
+        <el-carousel
+            trigger="click"
+            height="100px"
+            :autoplay="false"
+            @change="carouselChange($event)"
+            :style="carouselTop"
+            class="phone-FunctionHead-carousel-style"
+        >
+            <el-carousel-item v-for="(item, i) in carousel" :key="i">
+                <el-image
+                    :src="require('@/assets/head/' + item.webp)"
+                    class="FunctionHead-carousel-image-style"
+                ></el-image>
+                <h3 class="FunctionHead-carousel-text-style">
+                    {{ item.text }}
+                </h3>
+            </el-carousel-item>
+        </el-carousel>
+    </div>
 </template>
 
 <script>
@@ -55,6 +98,7 @@ export default
     data() 
     {
         return {
+            isPhone: false,
             head: 'head-front.webp',
             imageTop: 'top:' + (-512) + "px;",
             carouselTop: 'top:' + (window.innerHeight) + "px;",
@@ -216,15 +260,33 @@ export default
     },
     mounted()
     {
-        window.addEventListener('resize',() =>
-            this.imageTop = 'top:' + ((window.innerHeight - 400) / 2) + "px;",
-            this.carouselTop = 'top:' + ((window.innerHeight - 150) / 2) + "px;",
-        )
+        window.addEventListener('resize',() => {
+            this.isPhone = window.innerWidth < 800
+            if(this.isPhone)
+            {
+                this.carouselTop = 'top:' + ((window.innerHeight - 500) / 2) + "px;"
+                this.imageTop = 'top:' + ((window.innerHeight - 600) / 2) + "px;"
+            }
+            else
+            {
+                this.carouselTop = 'top:' + ((window.innerHeight - 150) / 2) + "px;"
+                this.imageTop = 'top:' + ((window.innerHeight - 400) / 2) + "px;"
+            }
+        })
     },
     created()
     {
-        setTimeout( () => { this.imageTop = 'top:' + ((window.innerHeight - 400) / 2) + "px;" },100)
-        setTimeout( () => { this.carouselTop = 'top:' + ((window.innerHeight - 150) / 2) + "px;" },100)
+        this.isPhone = window.innerWidth < 800
+        if(this.isPhone)
+        {
+            this.carouselTop = 'top:' + ((window.innerHeight - 500) / 2) + "px;"
+            this.imageTop = 'top:' + ((window.innerHeight - 600) / 2) + "px;"
+        }
+        else
+        {
+            this.carouselTop = 'top:' + ((window.innerHeight - 150) / 2) + "px;"
+            this.imageTop = 'top:' + ((window.innerHeight - 400) / 2) + "px;"
+        }
     },
 }
 </script>
@@ -307,4 +369,8 @@ export default
     --el-carousel-indicator-width: 10px;
     --el-carousel-indicator-padding-horizontal: 2px;
 }
+
+
+
+
 </style>
