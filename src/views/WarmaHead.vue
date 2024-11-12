@@ -33,10 +33,6 @@
                     class="FunctionHead-carousel-style"
                 >
                     <el-carousel-item v-for="(item, i) in carousel" :key="i">
-                        <el-image
-                            :src="require('@/assets/head/' + item.webp)"
-                            class="FunctionHead-carousel-image-style"
-                        ></el-image>
                         <h3 class="FunctionHead-carousel-text-style">
                             {{ item.text }}
                         </h3>

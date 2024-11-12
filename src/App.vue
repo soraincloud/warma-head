@@ -13,7 +13,7 @@
         class="app-Navlogo-style"
       ></el-image>
       <el-menu-item>
-        <h1 class="app-nav-menu-title-text">Warma-Head</h1>
+        <h1 class="app-nav-menu-title-text">WarmaHead</h1>
       </el-menu-item>
       <el-menu-item>
         <el-button type="danger" circle @click="changeFire()"><el-icon style="left: 3px;"><MagicStick /></el-icon></el-button>
